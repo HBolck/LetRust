@@ -9,3 +9,4 @@
 .history/
 
 src/p_01_init/target/*
+src/p_02_guess_number/target/*
