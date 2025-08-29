@@ -20,4 +20,10 @@ fn main() {
         println!("The value of var_1 in the inner scope is : {var_1}");
     }
     println!("The value of var_1 is : {var_1}");
+
+    // 数据类型
+
+    let temp: u32 = 100;
+    let temp_num: u32 = "123".parse().expect("转换失败！");
+    
 }
