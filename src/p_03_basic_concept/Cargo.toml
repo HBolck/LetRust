@@ -1,6 +1,9 @@
 [package]
 name = "p_03_basic_concept"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 
 [dependencies]
+num-rational = "0.4.2"
+num-integer = "0.1.46"
+num-traits = "0.2.19"

@@ -17,7 +17,9 @@ Rust 破除了这些障碍：它消除了旧的陷阱，并提供了伴你一路
 
 👆 这里是《Rust 程序设计语言》中前言的部分，这个项目将按照这本书的示例、内容进行编码，最终目的是学会Rust，会用Rust
 
-[《Rust 程序设计语言 中文版》](https://kaisery.github.io/trpl-zh-cn/foreword.html) 
+这本书的原作者是 Steve Klabnik 和 Carol Nichols ，由Rust社区补充完整
+
+[《Rust 程序设计语言 中文版》](https://kaisery.github.io/trpl-zh-cn/foreword.html)  由中文社区翻译
 
 
 ### 安装
