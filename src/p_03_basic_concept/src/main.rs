@@ -51,7 +51,6 @@ fn main() {
 
     println!("转为浮点数：{}", as_float); // 输出：3.3333333333333335
 
-
     // division
     let quotient = 56.7 / 32.2;
     let truncated = -5 / 3; // 结果为 -1
@@ -59,4 +58,11 @@ fn main() {
     // remainder
     let remainder = 43 % 5;
 
+    //====================元组
+
+    //使用可循啊的类型注解声明一个元组
+    let tup: (i32, f64, u8) = (500, 0.2, 1);
+
+    //使用模式匹配解构元组
+    let (x, y, z) = tup;
 }
