@@ -69,4 +69,15 @@ fn main() {
     //数组
 
     let array_a = [1, 2, 3, 4, 5];
+
+    println!("{}-{}", five(100), five(1))
+}
+
+/**
+ * 声明一个带返回值，带参数的函数
+ */
+fn five(number: i32) -> i32 {
+    let s = { 100 + 20 };
+
+    2 + 3 + number + s
 }
