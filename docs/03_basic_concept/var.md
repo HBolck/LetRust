@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="../style/main.css">
+
+## 常见的概念
+
+### 变量与可变性
+
+#### 变量
+
+在 Rust 中的变量默认是不可变的，这个看起来可能很奇怪，其他的语言都能够变更内容，在`C#`中可以添加`readonly`这样的关键字来修饰这个变量是只读的，类似的还有很多。
+
+但是这种风格成为了 Rust 的一种优势，可以让编码变得安全和简单。虽然默认是不可更改的，但是也可以通过关键字 `mut`来实现可改的特性。
+
+在 Rust 中 可以通过 `let` 关键字来创建变量。
+
+```
+Rust中的变量和函数的命名风格推荐使用蛇形命名法（snake_case），即全部小写字母，单词之间用下划线 _ 连接。
+```
+
+在下面的代码中可以看到更改不可变变量引入的错误。
+
+文件名：`src/p_03_basic_concept/src/main.rs`
+
+```rust
+fn main() {
+    let x = 5;
+    println!("The value of x is : {x}");
+    x = 6;
+}
+```
+
+```rust
+warning: value assigned to `x` is never read
+ --> src\main.rs:4:5
+  |
+4 |     x = 6;
+  |     ^
+  |
+  = help: maybe it is overwritten before being read?
+  = note: `#[warn(unused_assignments)]` on by default
+
+error[E0384]: cannot assign twice to immutable variable `x`
+ --> src\main.rs:4:5
+  |
+2 |     let x = 5;
+  |         - first assignment to `x`
+3 |     println!("The value of x is : {x}");
+4 |     x = 6;
+  |     ^^^^^ cannot assign twice to immutable variable
+  |
+help: consider making this binding mutable
+  |
+2 |     let mut x = 5;
+  |         +++
+
+For more information about this error, try `rustc --explain E0384`.
+warning: `p_03_basic_concept` (bin "p_03_basic_concept") generated 1 warning
+error: could not compile `p_03_basic_concept` (bin "p_03_basic_concept") due to 1 previous error; 1 warning emitted
+```
+
+为了解决这个问题，可以使用刚才提到的关键字 `mut`
+
+代码如下：
+
+```rust
+let mut x = 5;
+println!("The value of x is : {x}");
+x = 6;
+println!("The value of x is : {x}");
+```
+
+输出内容：
+
+```
+The value of x is : 5
+The value of x is : 6
+```
+
+通过上面的示例，很明显的可以看到通过 `mut` 修饰的变量从 5 变成了 6
+
+#### 常量
+
+说到常量，第一个想到的就是不可变的变量。在 Rust 中，通常使用`const`修饰，常量不光默认不可变，并且不允许使用 `mut` 进行修饰。
+
+下面是一个常见的例子
+
+```rust
+const USER_DEFAULT_ID: u32 = 10000;
+```
+
+这里面出现了一个没有提到的内容 `: u32` 。这个奇怪的家伙是数据类型，因为 Rust 通过`const`定义常量数据，但是并不能像 `let` 那样可以推断出这个常量的类型，所以这里需要显式的声明一下这个常量属于什么数据类型，关于数据类型这个概念，将在未来详细说明。
+
+#### 遮蔽
+
+这个概念在 [第二章节中的示例代码中有体现](../../src/p_02_guess_number/src/main.rs)。
+
+具体的操作就是，定义一个与之前变量同名的新变量，开发者们常常称第一个变量被第二个变量 `遮蔽` 。这意味着，当使用这个变量名的时候，编译器将看到第二个变量，也将取出第二个变量的值进行运算，知道第二个变量的作用域（是一对花括号，后面会将）结束。
+
+那第一个变量呢？当然是被遮盖掉了！（这里引入了`所有权`的概念，当遮蔽发生时，第一个变量值的所有权并没有被移动到第二个变量。第一个变量只是被“遮盖”而无法在当前作用域内再被直接访问。它会在当前作用域结束的位置被正常丢弃（Drop）。如果它的类型实现了 Drop Trait，它的析构函数也会在那个时候被调用 这里不用太纠结 `所有权` 知道就行！）
+
+这段代码可以很清楚的理解遮蔽的概念
+
+```rust
+let var_1 = 10;
+{
+    let var_1: u32 = 100;
+    println!("The value of var_1 in the inner scope is : {var_1}");
+}
+println!("The value of var_1 is : {var_1}");
+```
+
+输出：
+
+```
+The value of var_1 in the inner scope is : 100
+The value of var_1 is : 10
+```
+
+上面的代码创建了一个 var_1 的变量，赋值为 10。 代码进入一个新的作用域 `{}` 在新的作用域中，创建了一个同名的变量 var_1 赋值为 100。
+这个时候，var_1 被遮盖了，在这个作用域中，var_1 的值是 100，当离开这个作用域的时候，第一个变量的遮盖效果被去掉了，所以数值恢复到了 10
+

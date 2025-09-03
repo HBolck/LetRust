@@ -1,124 +1,6 @@
 <link rel="stylesheet" href="../style/main.css">
 
-## 常见的概念
-
-### 变量与可变性
-
-#### 变量
-
-在 Rust 中的变量默认是不可变的，这个看起来可能很奇怪，其他的语言都能够变更内容，在`C#`中可以添加`readonly`这样的关键字来修饰这个变量是只读的，类似的还有很多。
-
-但是这种风格成为了 Rust 的一种优势，可以让编码变得安全和简单。虽然默认是不可更改的，但是也可以通过关键字 `mut`来实现可改的特性。
-
-在 Rust 中 可以通过 `let` 关键字来创建变量。
-
-```
-Rust中的变量和函数的命名风格推荐使用蛇形命名法（snake_case），即全部小写字母，单词之间用下划线 _ 连接。
-```
-
-在下面的代码中可以看到更改不可变变量引入的错误。
-
-文件名：`src/p_03_basic_concept/src/main.rs`
-
-```rust
-fn main() {
-    let x = 5;
-    println!("The value of x is : {x}");
-    x = 6;
-}
-```
-
-```rust
-warning: value assigned to `x` is never read
- --> src\main.rs:4:5
-  |
-4 |     x = 6;
-  |     ^
-  |
-  = help: maybe it is overwritten before being read?
-  = note: `#[warn(unused_assignments)]` on by default
-
-error[E0384]: cannot assign twice to immutable variable `x`
- --> src\main.rs:4:5
-  |
-2 |     let x = 5;
-  |         - first assignment to `x`
-3 |     println!("The value of x is : {x}");
-4 |     x = 6;
-  |     ^^^^^ cannot assign twice to immutable variable
-  |
-help: consider making this binding mutable
-  |
-2 |     let mut x = 5;
-  |         +++
-
-For more information about this error, try `rustc --explain E0384`.
-warning: `p_03_basic_concept` (bin "p_03_basic_concept") generated 1 warning
-error: could not compile `p_03_basic_concept` (bin "p_03_basic_concept") due to 1 previous error; 1 warning emitted
-```
-
-为了解决这个问题，可以使用刚才提到的关键字 `mut`
-
-代码如下：
-
-```rust
-let mut x = 5;
-println!("The value of x is : {x}");
-x = 6;
-println!("The value of x is : {x}");
-```
-
-输出内容：
-
-```
-The value of x is : 5
-The value of x is : 6
-```
-
-通过上面的示例，很明显的可以看到通过 `mut` 修饰的变量从 5 变成了 6
-
-#### 常量
-
-说到常量，第一个想到的就是不可变的变量。在 Rust 中，通常使用`const`修饰，常量不光默认不可变，并且不允许使用 `mut` 进行修饰。
-
-下面是一个常见的例子
-
-```rust
-const USER_DEFAULT_ID: u32 = 10000;
-```
-
-这里面出现了一个没有提到的内容 `: u32` 。这个奇怪的家伙是数据类型，因为 Rust 通过`const`定义常量数据，但是并不能像 `let` 那样可以推断出这个常量的类型，所以这里需要显式的声明一下这个常量属于什么数据类型，关于数据类型这个概念，将在未来详细说明。
-
-#### 遮蔽
-
-这个概念在 [第二章节中的示例代码中有体现](../../src/p_02_guess_number/src/main.rs)。
-
-具体的操作就是，定义一个与之前变量同名的新变量，开发者们常常称第一个变量被第二个变量 `遮蔽` 。这意味着，当使用这个变量名的时候，编译器将看到第二个变量，也将取出第二个变量的值进行运算，知道第二个变量的作用域（是一对花括号，后面会将）结束。
-
-那第一个变量呢？当然是被遮盖掉了！（这里引入了`所有权`的概念，当遮蔽发生时，第一个变量值的所有权并没有被移动到第二个变量。第一个变量只是被“遮盖”而无法在当前作用域内再被直接访问。它会在当前作用域结束的位置被正常丢弃（Drop）。如果它的类型实现了 Drop Trait，它的析构函数也会在那个时候被调用 这里不用太纠结 `所有权` 知道就行！）
-
-这段代码可以很清楚的理解遮蔽的概念
-
-```rust
-let var_1 = 10;
-{
-    let var_1: u32 = 100;
-    println!("The value of var_1 in the inner scope is : {var_1}");
-}
-println!("The value of var_1 is : {var_1}");
-```
-
-输出：
-
-```
-The value of var_1 in the inner scope is : 100
-The value of var_1 is : 10
-```
-
-上面的代码创建了一个 var_1 的变量，赋值为 10。 代码进入一个新的作用域 `{}` 在新的作用域中，创建了一个同名的变量 var_1 赋值为 100。
-这个时候，var_1 被遮盖了，在这个作用域中，var_1 的值是 100，当离开这个作用域的时候，第一个变量的遮盖效果被去掉了，所以数值恢复到了 10
-
-### 数据类型
+## 数据类型
 
 在 Rust 中，每个值都有对应的 `数据类型` ，通过这个部分告诉 Rust 在代码中，数据将以什么方式存放在内存中。
 
@@ -145,11 +27,11 @@ let temp : u32 = 100;
 let temp_num: u32 = "123".parse().expect("转换失败！");
 ```
 
-#### 标量类型
+### 标量类型
 
 标量(scalar) 类型代表一个单独的值。Rust 有四种基本的标量类型：整型、浮点型、布尔类型和字符类型。
 
-##### 整型
+#### 整型
 
 整型是没有小数部分的数字。之前使用过`u32`整数类型。它关联的值应该是一个占据 32 比特的无符号整数（有符号是 `i` 开头 无符号是 `u` 开头）
 
@@ -248,7 +130,7 @@ fn main() {
 }
 ```
 
-###### 整型字面量
+##### 整型字面量
 
 在 Rust 中，存在整型的字面量，这些字面量被允许在一些特定的场景使用。
 
@@ -262,7 +144,7 @@ fn main() {
 
 如果不确定使用哪种类型，那么一般使用`i32`、`isize`、`usize`作为一些基础类型使用。
 
-##### 浮点型
+#### 浮点型
 
 Rust 存在两种原生的 `浮点数` 类型。`f32` `f64`
 
@@ -272,7 +154,7 @@ let f = 2.0; //f64
 let d: f32 = 3.0; //f32
 ```
 
-###### 数值运算
+##### 数值运算
 
 ```rust
 fn main() {
@@ -294,7 +176,7 @@ fn main() {
 }
 ```
 
-##### 布尔类型
+#### 布尔类型
 
 Rust 提供了一种布尔类型，值同样为 `true` `false`。
 
@@ -306,7 +188,7 @@ fn main() {
 }
 ```
 
-##### 字符类型
+#### 字符类型
 
 Rust 的 `char` 类型是语言中最原始的字母类型。
 
@@ -318,11 +200,11 @@ fn main() {
 }
 ```
 
-#### 复合类型
+### 复合类型
 
 复合类型(Compound types) 可以将多个值合成一个类型。Rust 有两个原生的复合类型:元组(tuple)和数组(array)
 
-##### 元组类型
+#### 元组类型
 
 元组是一个将多个不同类型的值组合进一个复合类型的主要方式。元组长度固定：一旦声明，其长度不会增大或缩小。
 
@@ -364,3 +246,82 @@ fn main() {
 ```
 
 不带有任何值的元组有个特殊的名称，叫做 **单元(unit)**。这种值以及对应的类型都写作 `()` 表示空值或空的返回类型。如果表达式不返回任何其他值，则会隐式返回单元值。
+
+
+#### 数组类型
+
+另一个包含多个值的方式是 `数组(array)`。与元组不同的地方在于，数组中的每个元素类型必须一致，Rust中的数组与一些其他语言中的数组不同，在Rust中，数组的长度是固定且不可变的。
+
+下面是一个示例：
+
+```rust
+fn main(){
+   //构建一个长度为5 i32类型的数组
+   let array_a = [1, 2, 3, 4, 5];
+}
+```
+
+如果有个场景需要固定数量的元素数量的时候，数组是一个不错的选择。
+
+```rust
+let months = ["January", "February", "March", "April", "May", "June", "July",
+              "August", "September", "October", "November", "December"];
+
+```
+
+数组的声明方式有很多种，下面的几种方式都能够快速的创建一个数组。
+
+```rust
+let a: [i32; 5] = [1, 2, 3, 4, 5];
+
+let a = [3; 5]; //let a = [3, 3, 3, 3, 3];
+
+```
+
+值得说明的是，数组是可以被分配在栈上的固定已知大小的内存块。可以使用索引来访问数组，索引的其实下标是 `0`。
+
+```rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    let first = a[0];
+    let second = a[1];
+}
+```
+
+在使用下标访问数组的时候，需要注意数组越界的问题。这个问题在`check`过程中是检查不出来的，只有`运行时`才可以被抛出。
+
+`rust是静态语言，没有运行时，这里又提到了运行时，这个运行时又是什么呢？ 这里暂时不纠结，只要知道rust可以在运行检查中抛出异常就可以了。`
+
+```rust
+use std::io;
+
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    println!("Please enter an array index.");
+
+    let mut index = String::new();
+
+    io::stdin()
+        .read_line(&mut index)
+        .expect("Failed to read line");
+
+    let index: usize = index
+        .trim()
+        .parse()
+        .expect("Index entered was not a number");
+
+    let element = a[index];
+
+    println!("The value of the element at index {index} is: {element}");
+}
+```
+
+上面的代码会输出下面的异常内容,在后面的内容中，将使用 `恐慌`和`避免恐慌`的概念来处理这种异常的输出，进而保证程序的正常运行
+
+```
+thread 'main' panicked at src/main.rs:19:19:
+index out of bounds: the len is 5 but the index is 10
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+```
