@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Rust" width="260" src="https://i-blog.csdnimg.cn/blog_migrate/303338b4b813e091576565c7c4c152c3.png">
+  <img alt="Rust" width="260" src="img.png">
 </p>
 
 <h1 align="center">LetRust</h1>
