@@ -8,6 +8,7 @@
 
 A repository built based on "The Rust Programming Language" for learning the Rust language. 
 
+</div>
 
 English | [简体中文](./README.md)
 
