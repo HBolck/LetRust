@@ -1,4 +1,27 @@
-# LetRust
-基于《Rust 程序设计语言》构建的仓库。用于学习Rust语言
+<p align="center">
+  <img alt="Rust" width="260" src="https://i-blog.csdnimg.cn/blog_migrate/303338b4b813e091576565c7c4c152c3.png">
+</p>
 
-<img src="https://i-blog.csdnimg.cn/blog_migrate/303338b4b813e091576565c7c4c152c3.png" width="200" height="auto" />
+<h1 align="center">LetRust</h1>
+
+<div align="center">
+
+基于《Rust 程序设计语言》构建的仓库，用于学习Rust语言。
+
+
+简体中文 | [English](./READMD_en.md)
+
+这个仓库中的部分代码并没有完全按照书中照搬下来，而是引入了部分自己的理解。可能会出现部分和书中不一致的内容，这个请谅解，我的本意并不是照抄整本书，而是通过自己的理解学习整本书。
+
+如果在某些地方存在歧义或者问题，可以留言或提Issues，欢迎各位喜欢Rust和鼓捣技术的道友！
+
+让我们一起打开Rust的魔法世界。
+
+
+
+```
+不要太纠结为什么Rust要这么定义语法结构，也不要过多陷入细节。
+随着学习，后面会更深入体会作者的意图，也能更好的理解这种语法结构的好处。
+Rust是一个严格的教官，它会约束你的代码习惯，让代码变得更高效更安全。
+```
+这是我的个人理解，也是给各位刚接触Rust的道友的建议。

@@ -4,27 +4,60 @@ fn main() {
     // let x = 5;
     // println!("The value of x is : {x}");
     // x = 6;  这里赋值会引入错误，变量不能更改
-
     //变量的定义
+    var_define();
+    //常量的定义
+    var_define_const();
+    //遮蔽
+    var_define_mask();
+    //数据类型
+    data_type();
+    //元组
+    tuple_define();
+    //数组
+    array_define();
+    //函数
+    println!("{}-{}", five(100), five(1));
+    //控制流-if
+    control_flow_if();
+    //控制流 - else if
+    control_flow_else_if();
+}
+
+/**
+ * 定义常量
+ */
+fn var_define() {
     let mut x = 5;
     println!("The value of x is : {x}");
     x = 6;
     println!("The value of x is : {x}");
+}
 
-    //常量的定义
+/**
+ * 定义常量
+ */
+fn var_define_const() {
     const USER_DEFAULT_ID: u32 = 10000;
     println!("The value of USER_DEFAULT_ID is : {USER_DEFAULT_ID}");
+}
 
-    //遮蔽
+/**
+ * 遮蔽
+ */
+fn var_define_mask() {
     let var_1 = 10;
     {
         let var_1: u32 = 100;
         println!("The value of var_1 in the inner scope is : {var_1}");
     }
     println!("The value of var_1 is : {var_1}");
+}
 
-    // 数据类型
-
+/**
+ * 数据类型
+ */
+fn data_type() {
     let temp: u32 = 100;
     let temp_num: u32 = "123".parse().expect("转换失败！");
 
@@ -57,20 +90,22 @@ fn main() {
 
     // remainder
     let remainder = 43 % 5;
+}
 
-    //====================元组
-
+/**元组定义 */
+fn tuple_define() {
     //使用可循啊的类型注解声明一个元组
     let tup: (i32, f64, u8) = (500, 0.2, 1);
 
     //使用模式匹配解构元组
     let (x, y, z) = tup;
+}
 
-    //数组
-
+/**
+ * 数组定义
+ */
+fn array_define() {
     let array_a = [1, 2, 3, 4, 5];
-
-    println!("{}-{}", five(100), five(1))
 }
 
 /**
@@ -80,4 +115,33 @@ fn five(number: i32) -> i32 {
     let s = { 100 + 20 };
 
     2 + 3 + number + s
+}
+
+/**
+ * 控制流 - if
+ */
+fn control_flow_if() {
+    let num = 3;
+    if num < 5 {
+        println!(" num :  {} 小于 5", num);
+    } else {
+        println!(" num :  {} 大于 5", num);
+    }
+}
+
+/**
+ * 控制流 - else if
+ */
+fn control_flow_else_if() {
+    let number = 6;
+
+    if number % 4 == 0 {
+        println!("number is divisible by 4");
+    } else if number % 3 == 0 {
+        println!("number is divisible by 3");
+    } else if number % 2 == 0 {
+        println!("number is divisible by 2");
+    } else {
+        println!("number is not divisible by 4, 3, or 2");
+    }
 }
