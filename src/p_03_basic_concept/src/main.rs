@@ -22,6 +22,15 @@ fn main() {
     control_flow_if();
     //控制流 - else if
     control_flow_else_if();
+
+    //loop
+    control_loop();
+
+    //control_loop_result
+    control_loop_result();
+
+    //
+    control_loop_tag();
 }
 
 /**
@@ -144,4 +153,55 @@ fn control_flow_else_if() {
     } else {
         println!("number is not divisible by 4, 3, or 2");
     }
+}
+
+fn control_loop() {
+    let mut count = 0;
+
+    loop {
+        if count > 3 {
+            break;
+        }
+        count = count + 1;
+        println!("control_loop count >>> {count}");
+    }
+}
+
+/**
+ * loop 带结果
+ */
+fn control_loop_result() {
+    let mut count = 0;
+    let result = loop {
+        count += 1;
+        if count == 10 {
+            break count * 5;
+        }
+    };
+    println!("control_loop_result >> result >> {result}")
+}
+
+/**
+ * 嵌套循环-Tag
+ */
+fn control_loop_tag() {
+    let mut count = 0;
+    'counting_up: loop {
+        println!("count = {count}");
+        let mut remaining = 10;
+
+        loop {
+            println!("remaining = {remaining}");
+            if remaining == 9 {
+                break;
+            }
+            if count == 2 {
+                break 'counting_up;
+            }
+            remaining -= 1;
+        }
+
+        count += 1;
+    }
+    println!("End count = {count}");
 }
