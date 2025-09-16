@@ -7,3 +7,10 @@
 .tag_text{
     color:"#FFA366";
 }
+
+.box{
+    padding:10px;
+    background-color:#b9b1b1;
+    border-radius: 10px;
+    color:#ebe0db;
+}
