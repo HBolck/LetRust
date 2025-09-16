@@ -29,10 +29,10 @@ Rust 破除了这些障碍：它消除了旧的陷阱，并提供了伴你一路
 <div style="border: 1px solid #eee; padding: 15px; border-radius: 5px; background: #f9f9f9;">
   <h3 style="margin-top: 0;">目录</h3>
   <ol style="padding-left: 20px;">
-    <li><a href="index.md">一、入门</a>
+    <li><a href="index.md#入门">一、入门</a>
       <ul>
-        <li><a href="./src/01/1.1_install.md">1.1 安装</a></li>
-        <li><a href="./src/01/1.2_create.md">1.2 项目创建</a></li>
+        <li><a href="./src/01/1.1_install.md#安装">1.1 安装</a></li>
+        <li><a href="./src/01/1.2_create.md#创建项目">1.2 项目创建</a></li>
       </ul>
     </li>
     <li><a href="#2-核心概念">二、核心概念</a></li>
