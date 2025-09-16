@@ -8,6 +8,8 @@ title: 开始 # 页面标题（会替换模板中的 {{ page.title }}）
 
 A repository built based on "The Rust Programming Language" for learning the Rust language.
 
+[👨‍💻仓库地址](https://github.com/HBolck/LetRust)
+
 ## 目录
 
 1. [一、✅ 入门(Introduction)](./src/01/1.0_first.md#入门)
