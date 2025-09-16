@@ -1,4 +1,4 @@
 # _config.yml
 encoding: utf-8
-title: 我的站点标题  # 站点标题
-description: 站点描述  # 站点描述
+title: LetRust   # 站点标题
+description:  基于《Rust 程序设计语言》构建的仓库，用于学习Rust语言。 # 站点描述
