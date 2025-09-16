@@ -1,0 +1,30 @@
+<!-- _layouts/default.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title> <!-- 优先使用页面标题，否则用站点标题 -->
+  <!-- 引入自定义 CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <!-- 可选：引入外部样式（如 Font Awesome 图标） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <!-- 页面头部（固定内容） -->
+  <header>
+    <h1>{{ site.title }}</h1>
+    <p>{{ site.description }}</p>
+  </header>
+
+  <!-- 主要内容区（Markdown 渲染后会插入这里） -->
+  <main>
+    {{ content }}  <!-- 这是核心：Markdown 内容会被渲染到这里 -->
+  </main>
+
+  <!-- 页脚 -->
+  <footer>
+    <p>© 2024 我的站点</p>
+  </footer>
+</body>
+</html>
