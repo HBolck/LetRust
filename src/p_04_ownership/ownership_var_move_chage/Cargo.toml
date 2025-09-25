@@ -1,0 +1,6 @@
+[package]
+name = "ownership_var_move_chage"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
