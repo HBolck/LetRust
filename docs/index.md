@@ -27,3 +27,4 @@ Based on the "Rust Programming Language", it is designed for learning the Rust l
    - 4.1 [所有权](./src/04/4.1_ownership.md#所有权)
    - 4.2 [String类型](./src/04/4.2_ownership_string.md#string-类型)
    - 4.3 [内存和分配](./src/04/4.3_ownership_string_memory.md#内存和分配)      
+   - 4.4 [变量的移动和数据交换](./src/04/4.4_var_move_change.md#移动的变量和数据交换)

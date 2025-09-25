@@ -13,3 +13,4 @@ src/p_01_init/target/*
 src/p_02_guess_number/target/*
 src/p_03_basic_concept/target/*
 src/p_04_ownership/ownership_string/target/*
+src/p_04_ownership/ownership_var_move_chage/target/*
